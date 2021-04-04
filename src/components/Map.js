@@ -5,14 +5,14 @@ import { Context as LocationContext } from "../context/LocationContext";
 
 const Map = () => {
   const {
-    state: { currentLocation },
+    state: { currentLocation, locations },
   } = useContext(LocationContext);
 
   if (!currentLocation) {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />;
   }
 
-  initialLocation = {
+  const initialLocation = {
     longitude: -122.0312186,
     latitude: 37.33233141,
   };
@@ -20,16 +20,20 @@ const Map = () => {
     <MapView
       style={styles.map}
       initialRegion={{
-        ...initialLocation,
+        ...currentLocation.coords,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
       }}
     >
       <Circle
-        center={currentLocation.coords}
+        center={currentLocation.coords} //To be replced with currentLocation.coords 
         radius={30}
         strokeColor="rgba(158, 158, 255, 1.0)"
         fillColor="rgba(158, 158, 255, 0.3)"
+      />
+
+      <Polyline
+        coordinates={locations.map(loc => loc.coords)}
       />
     </MapView>
   );
