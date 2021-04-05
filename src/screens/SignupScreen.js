@@ -16,10 +16,9 @@ const SignupScreen = ({ navigation }) => {
         errorMessage={state.errorMessage}
         submitButtonText="Sign Up"
         onSubmit={signup}
-      />
-      <NavLink
-        routeName="Signin"
-        text="Already have an account? Sign in instead!"
+        navigationText = "Already have an account"
+        route = "Signin"
+        repeat = {true}
       />
     </View>
   );
@@ -34,8 +33,8 @@ SignupScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#003f5c',
     justifyContent: 'center',
-    marginBottom: 250,
   },
 });
 

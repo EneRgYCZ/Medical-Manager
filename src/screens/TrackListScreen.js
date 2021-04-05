@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { Context as TrackContext } from '../context/TrackContext'
 import { ListItem } from 'react-native-elements'
@@ -13,6 +13,7 @@ const TrackListScreen = ({ navigation }) => {
       <NavigationEvents
         onWillFocus={fetchTracks}
       />
+
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}
