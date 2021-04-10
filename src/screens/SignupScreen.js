@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext';
 import AuthForm from '../components/AuthForm';
-import NavLink from '../components/NavLink';
 
 const SignupScreen = ({ navigation }) => {
   const { state, signup, clearErrorMessage } = useContext(AuthContext);
@@ -11,6 +10,7 @@ const SignupScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillFocus={clearErrorMessage} />
+
       <AuthForm
         headerText="Sign Up for Tracker"
         errorMessage={state.errorMessage}
@@ -18,8 +18,8 @@ const SignupScreen = ({ navigation }) => {
         onSubmit={signup}
         navigationText = "Already have an account"
         route = "Signin"
-        repeat = {true}
-      />
+        crateAccount = {true} //Parameter for deciding if you have to repeat a password (e.g. when creating an account)
+      />  
     </View>
   );
 };

@@ -22,7 +22,7 @@ const TrackCreateScreen = ({ isFocused, navigation }) => {
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text h2>Create a Track</Text>
+      <Text h2>Adauga Pacienti</Text>
       <Map />
       {err ? <Text>Please enable location services</Text> : null}
       <TrackForm />
@@ -32,7 +32,7 @@ const TrackCreateScreen = ({ isFocused, navigation }) => {
 
 TrackCreateScreen.navigationOptions = () => {
   return {
-    title : 'Add Track',
+    title : 'Adauga Pacienti',
     tabBarIcon : <FontAwesome name = "plus" size = {27} />
   }
 }

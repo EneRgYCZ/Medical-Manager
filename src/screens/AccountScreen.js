@@ -1,20 +1,28 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
 import { FontAwesome } from '@expo/vector-icons';
 
 const AccountScreen = () => {
-  const { signout } = useContext(AuthContext);
+
+  const { signout, fetchUser, state } = useContext(AuthContext);
 
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text style={{ fontSize: 48, alignSelf : 'center' }}>AccountScreen</Text>
+
+      <NavigationEvents
+        onWillFocus={fetchUser}
+      />
+
+      <Text style={{ fontSize: 35, alignSelf: 'center' }}>Bine ai revenit {state.firstName}</Text>
+
       <Spacer>
         <Button title="Sign Out" onPress={signout} />
       </Spacer>
+      
     </SafeAreaView>
   );
 };
