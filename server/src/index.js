@@ -2,7 +2,7 @@ require("./models/User");
 require("./models/Track");
 const express = require("express");
 const mongoose = require("mongoose");
-const mongoUri = require("./ApiKey/mongoKey");
+const mongoUri = require("./Api/mongoKey");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
