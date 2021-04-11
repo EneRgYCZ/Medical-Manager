@@ -39,7 +39,7 @@ TrackListScreen.navigationOptions = () => {
   return {
     title : 'Pacienti',
     headerRight: () => (
-      <TouchableOpacity>
+      <TouchableOpacity style={{ marginHorizontal: 10 }}>
         <FontAwesome name="search" size={24} color="black" />
       </TouchableOpacity>
     )
