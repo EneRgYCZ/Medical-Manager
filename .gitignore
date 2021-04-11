@@ -9,7 +9,7 @@ npm-debug.*
 *.orig.*
 web-build/
 /server/node_modules/**/*
-/server/src/ApiKey
+/server/src/Api
 
 # macOS
 .DS_Store
