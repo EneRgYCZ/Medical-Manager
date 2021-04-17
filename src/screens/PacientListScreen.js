@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
-import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
-import { NavigationEvents } from "react-navigation";
 import { ListItem } from "react-native-elements";
+import { NavigationEvents } from "react-navigation";
 import { Context as PacientContext } from "../context/PacientContext";
-import { FontAwesome } from '@expo/vector-icons'; 
+import { StyleSheet, FlatList, TouchableOpacity, TextInput, View } from "react-native";
 
 const PacientListScreen = ({ navigation }) => {
 
@@ -11,13 +10,16 @@ const PacientListScreen = ({ navigation }) => {
 
   return (
     <>
-      <NavigationEvents onWillFocus={fetchPacients} />
+      <NavigationEvents 
+        onWillFocus={fetchPacients} 
+      />
+
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('TrackDetail', { _id : item._id })}>
               <ListItem>
                 <ListItem.Content>
                   <ListItem.Title>{item.fullName}</ListItem.Title>
@@ -36,15 +38,28 @@ PacientListScreen.navigationOptions = () => {
   return {
     title : 'Pacienti',
     headerRight: () => (
-      <TouchableOpacity style={{ marginHorizontal: 10 }}>
-        <FontAwesome name="search" size={24} color="black" />
-      </TouchableOpacity>
+      <View style = {styles.header}>
+        <TextInput
+          style={styles.search}
+          placeholder = 'Cauta pacient...'
+          underlineColorAndroid="transparent"
+        />
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  
+  search : {
+    fontSize: 19,
+    paddingTop : 14,
+    paddingRight : 140,
+    fontWeight: 'bold',
+  },
+  header : {
+    flex : 1,
+    justifyContent : 'space-between'
+  }
 });
 
 export default PacientListScreen;
