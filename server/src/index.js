@@ -1,11 +1,13 @@
 require("./models/User");
 require("./models/Track");
+require("./models/Pacient")
 const express = require("express");
 const mongoose = require("mongoose");
 const mongoUri = require("./Api/mongoKey");
 const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRoutes");
 const trackRoutes = require("./routes/trackRoutes");
+const pacientRoutes = require("./routes/pacientRoutes");
 const requireAuth = require("./middlewares/requireAuth");
 
 const app = express();
@@ -13,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(trackRoutes);
+app.use(pacientRoutes);
 
 if (!mongoUri) {
   throw new Error(

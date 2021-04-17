@@ -1,31 +1,14 @@
-import React, { useContext, useCallback } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text } from 'react-native-elements';
-import { SafeAreaView, withNavigationFocus } from 'react-navigation';
-import Map from '../components/Map';
-import { Context as LocationContext } from '../context/LocationContext';
-import useLocation from '../hooks/useLocation';
-import TrackForm from '../components/TrackForm';
 import { FontAwesome } from '@expo/vector-icons';
+import PacientForm from '../components/PacientForm';
+import { SafeAreaView, withNavigationFocus } from 'react-navigation';
 
 const TrackCreateScreen = ({ isFocused, navigation }) => {
 
-  const { state, addLocation } = useContext(LocationContext);
-
-  const callback = useCallback(
-    location => {
-      addLocation(location, state.recording);
-    },
-    [state.recording]
-  );
-  const [err] = useLocation(isFocused || state.recording, callback);
-
   return (
     <SafeAreaView forceInset={{ top: 'always' }}>
-      <Text h2>Adauga Pacienti</Text>
-      <Map />
-      {err ? <Text>Please enable location services</Text> : null}
-      <TrackForm />
+      <PacientForm />
     </SafeAreaView>
   );
 };

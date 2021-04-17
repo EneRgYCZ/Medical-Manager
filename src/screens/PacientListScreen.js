@@ -1,29 +1,26 @@
-import React, { useContext } from 'react';
-import { ListItem } from 'react-native-elements'
-import { FontAwesome } from '@expo/vector-icons';
-import { NavigationEvents } from 'react-navigation';
-import { Context as TrackContext } from '../context/TrackContext'
-import { StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import React, { useContext } from "react";
+import { StyleSheet, FlatList, TouchableOpacity } from "react-native";
+import { NavigationEvents } from "react-navigation";
+import { ListItem } from "react-native-elements";
+import { Context as PacientContext } from "../context/PacientContext";
+import { FontAwesome } from '@expo/vector-icons'; 
 
-const TrackListScreen = ({ navigation }) => {
+const PacientListScreen = ({ navigation }) => {
 
-  const { state, fetchTracks } = useContext(TrackContext)
+  const { state, fetchPacients } = useContext(PacientContext);
 
   return (
     <>
-      <NavigationEvents
-        onWillFocus={fetchTracks}
-      />
-
+      <NavigationEvents onWillFocus={fetchPacients} />
       <FlatList
         data={state}
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate('TrackDetail', { _id : item._id })}>
+            <TouchableOpacity>
               <ListItem>
                 <ListItem.Content>
-                  <ListItem.Title>{item.name}</ListItem.Title>
+                  <ListItem.Title>{item.fullName}</ListItem.Title>
                 </ListItem.Content>
                 <ListItem.Chevron />
               </ListItem>
@@ -35,7 +32,7 @@ const TrackListScreen = ({ navigation }) => {
   );
 };
 
-TrackListScreen.navigationOptions = () => {
+PacientListScreen.navigationOptions = () => {
   return {
     title : 'Pacienti',
     headerRight: () => (
@@ -50,4 +47,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default TrackListScreen;
+export default PacientListScreen;

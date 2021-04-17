@@ -1,19 +1,20 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { Provider as TrackProvider } from './src/context/TrackContext'
-import AccountScreen from './src/screens/AccountScreen';
+import { FontAwesome } from '@expo/vector-icons';
+import { setNavigator } from './src/navigationRef';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
+import AccountScreen from './src/screens/AccountScreen';
+import { createStackNavigator } from 'react-navigation-stack';
+import PacientListScreen from './src/screens/PacientListScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import PacientCreateScreen from './src/screens/PacientCreateScreen';
 import PacientDetailScreen from './src/screens/PacientDetailScreen';
-import PacientListScreen from './src/screens/PacientListScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
-import { setNavigator } from './src/navigationRef';
-import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import { Provider as TrackProvider } from './src/context/TrackContext';
+import { Provider as PacientProvider } from './src/context/PacientContext'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Provider as LocationProvider } from './src/context/LocationContext';
-import { FontAwesome } from '@expo/vector-icons';
 
 const trackListFlow =  createStackNavigator({
   TrackList: PacientListScreen, //TrackList = PacientList
@@ -44,16 +45,18 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
   return (
-    <TrackProvider>
-      <LocationProvider>
-        <AuthProvider>
-          <App
-            ref={(navigator) => {
-              setNavigator(navigator);
-            }}
-          />
-        </AuthProvider>
-      </LocationProvider>
-    </TrackProvider>
+    <PacientProvider>
+      <TrackProvider>
+        <LocationProvider>
+          <AuthProvider>
+            <App
+              ref={(navigator) => {
+                setNavigator(navigator);
+              }}
+            />
+          </AuthProvider>
+        </LocationProvider>
+      </TrackProvider>
+    </PacientProvider>
   );
 };

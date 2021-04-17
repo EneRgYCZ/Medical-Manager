@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
-import { Text } from 'react-native-elements';
 import NavLink from '../components/NavLink';
+import { Text } from 'react-native-elements';
+import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
 
 const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, route, crateAccount }) => {
+  
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');

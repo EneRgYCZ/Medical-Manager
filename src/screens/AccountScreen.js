@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import { SafeAreaView, NavigationEvents } from 'react-navigation';
 import Spacer from '../components/Spacer';
-import { Context as AuthContext } from '../context/AuthContext';
+import { Button } from 'react-native-elements';
+import { StyleSheet, Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { Context as AuthContext } from '../context/AuthContext';
+import { SafeAreaView, NavigationEvents } from 'react-navigation';
 
 const AccountScreen = () => {
 

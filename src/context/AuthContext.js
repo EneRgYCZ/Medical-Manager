@@ -80,8 +80,6 @@ const fetchUser = dispatch => async () => {
 
   const response = await trackerApi.get("/users", { headers: headers })
 
-  console.log(response)
-
   dispatch({ type: 'fetch_user', payload: response.data })
 }
 
