@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
 import Spacer from '../components/Spacer';
 import { StyleSheet, Text } from 'react-native';
-import useSavePacient from '../hooks/useSavePacient';
+import React, { useState, useContext } from 'react';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Context as PacientContext } from '../context/PacientContext'
 
 const PacientForm = () => {
+
+    const { createPacient } = useContext(PacientContext)
 
     const [nrSAP, setNrSAP] = useState('');
     const [fullName, setFullName] = useState('');
     const [dateOfReport, setDateOfReport] = useState('');
     const [clinicPetromed, setClinicPetromed] = useState('');
-
-    const [savePacient] = useSavePacient();
 
     return (
         <>
@@ -83,17 +83,18 @@ const PacientForm = () => {
             <Spacer>
                 <Button
                     title="CREAZA PACIENT"
-                    onPress={savePacient}
+                    onPress={() => createPacient(fullName, dateOfReport, clinicPetromed, nrSAP)}
                 />
             </Spacer>
         </>
     );
 };
 
+
 const styles = StyleSheet.create({
     HeadingText: {
-        paddingLeft: 10,
         fontSize: 17,
+        paddingLeft: 10,
         fontWeight: 'bold'
     }
 });

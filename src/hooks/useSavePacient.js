@@ -1,20 +1,18 @@
+import { useContext } from 'react';
 import { navigate } from '../navigationRef';
-import { useContext, useState } from 'react';
 import { Context as PacientContext } from '../context/PacientContext';
 
 export default () => {
 
     const { createPacient } = useContext(PacientContext);
 
-    const [nrSAP] = useState('');
-    const [fullName] = useState('');
-    const [dateOfReport] = useState('');
-    const [clinicPetromed] = useState('');
-
-    const savePacient = async () => {
-        await createPacient(fullName, dateOfReport, clinicPetromed, nrSAP );
-        reset();
-        navigate('TrackList');
+    const savePacient = async (fullName, dateOfReport, clinicPetromed, nrSAP) => {
+        try {
+            await createPacient(fullName, dateOfReport, clinicPetromed, nrSAP);
+            navigate('TrackList');
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return[savePacient]
