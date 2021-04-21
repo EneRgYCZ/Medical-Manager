@@ -16,9 +16,9 @@
 
 #### For the moment the database that we are using is MongoDB.
 
-### A. Create a folder named `Api` in `/server/src`.
-### B. Create a file named `mongoKey` in `/server/src/Api`.
-### C. Add the following code in the `mongoKey` file.
+#### A. Create a folder named `Api` in `/server/src`.
+#### B. Create a file named `mongoKey` in `/server/src/Api`.
+#### C. Add the following code in the `mongoKey` file.
 ```
 const mongoUri = "YOUR_MONGODB_URI";
 
