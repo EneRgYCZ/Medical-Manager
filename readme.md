@@ -24,7 +24,7 @@ const mongoUri = "YOUR_MONGODB_URI";
 
 module.exports = mongoUri
 ```
-### D. Execute thw following command in `/server`
+#### D. Execute thw following command in `/server`
 ```
 -npm run dev 
 ```
