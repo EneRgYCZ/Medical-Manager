@@ -10,7 +10,7 @@ const pacientSchema = new mongoose.Schema({
         required: true,
     },
     dateOfReport: {
-        type: Date,
+        type: String,
         required: true,
     },
     clinicPetromed: {

@@ -15,7 +15,7 @@ const PacientList = ({ results }) => {
                     <ListItem>
                         <ListItem.Content>
                             <ListItem.Title>{item.fullName}</ListItem.Title>
-                            <ListItem.Subtitle>{item.dateOfReport}</ListItem.Subtitle>
+                            <ListItem.Subtitle>Data raportarii: {item.dateOfReport}</ListItem.Subtitle>
                         </ListItem.Content>
                         <ListItem.Chevron />
                     </ListItem>
