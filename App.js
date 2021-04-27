@@ -24,7 +24,7 @@ const trackListFlow =  createStackNavigator({
 trackListFlow.navigationOptions = () => {
   return {
     title : 'Pacienti',
-    tabBarIcon: <FontAwesome name = "th-list" size = {27} />
+    tabBarIcon: <FontAwesome name = "th-list" size = {27} color = '#fb5b5a' />
   }
 }
 
@@ -38,7 +38,16 @@ const switchNavigator = createSwitchNavigator({
     trackListFlow,
     TrackCreate: PacientCreateScreen, //TrackCreate = PacientCreate
     Account: AccountScreen,
-  }),
+  },
+  {
+    tabBarOptions : {
+      style: {
+        borderWidth: 0,
+        backgroundColor: '#003f5c',
+      },
+    }
+  }
+  ),
 });
 
 const App = createAppContainer(switchNavigator);

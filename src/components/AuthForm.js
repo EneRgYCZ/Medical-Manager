@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import NavLink from '../components/NavLink';
 import { Text } from 'react-native-elements';
+import { ScrollView } from 'react-native-gesture-handler';
 import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
 
 const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, route, crateAccount }) => {
@@ -25,8 +26,9 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
   return (
     <View style={styles.container}>
 
-      <Text style={styles.logo}>_Maps</Text>
-
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+      <Text style={styles.logo}>Medical Manager</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -163,6 +165,8 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       ) : null}
 
+      </View>
+    </ScrollView>
     </View>
   );
 };
@@ -177,6 +181,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
+    paddingTop: 15,
     backgroundColor: '#003f5c',
     alignItems: 'center',
     justifyContent: 'center',
@@ -223,7 +228,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: "#fb5b5a",
     marginBottom: 40
-  }
+  }, 
 });
 
 export default AuthForm;

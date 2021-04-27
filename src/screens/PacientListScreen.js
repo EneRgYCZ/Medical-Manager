@@ -1,13 +1,22 @@
-import React, { useContext, useState, useEffect } from "react";
-import { NavigationEvents } from "react-navigation";
+import { LogBox } from 'react-native';
+import { SearchBar } from "react-native-elements";
 import PacientList from '../components/PacientList';
-import { ListItem, SearchBar } from "react-native-elements";
+import React, { useContext, useState, useCallback } from "react";
+import { NavigationEvents, SafeAreaView } from "react-navigation";
 import { Context as PacientContext } from "../context/PacientContext";
-import { StyleSheet, FlatList, TouchableOpacity, TextInput, View } from "react-native";
+import { StyleSheet, RefreshControl, ScrollView } from "react-native";
+
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
 
 const PacientListScreen = ({ navigation }) => {
 
+  LogBox.ignoreAllLogs();
+
   const { state, fetchPacients } = useContext(PacientContext);
+
+  const [refreshing, setRefreshing] = useState(false);
 
   const [search, setSearch] = useState('')
 
@@ -20,45 +29,73 @@ const PacientListScreen = ({ navigation }) => {
     })
   }
 
+  const onRefresh = useCallback(() => {
+    fetchPacients()
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
   return (
-    <>
-      <NavigationEvents 
-        onWillFocus={fetchPacients} 
-      />
+    <SafeAreaView 
+      forceInset={{ top: 'always' }} 
+      style = {styles.container} 
+    > 
 
-      <SearchBar        
-        round    
-        lightTheme
-        value = {search}
-        autoCorrect={false}   
-        onChangeText={setSearch}
-        placeholder="Cauta Pacienti..."                           
-      />  
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+      >
 
-      <PacientList
-        results = {filterSearch(search)}
-      />
-    </>
+        <NavigationEvents 
+          onDidFocus={fetchPacients} 
+        />
+
+        <SearchBar        
+          round    
+          darkTheme
+          value = {search}
+          autoCorrect={false}   
+          onChangeText={setSearch}
+          placeholder="Cauta Pacienti..."
+          containerStyle = {styles.container}                     
+        />  
+
+        <PacientList
+          results = {filterSearch(search)}
+        />
+
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 PacientListScreen.navigationOptions = () => {
   return {
-    title : 'Pacienti',
+    headerShown: false,
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: '#003f5c'
+  },
+
   search : {
     fontSize: 19,
     paddingTop : 14,
     paddingRight : 140,
     fontWeight: 'bold',
   },
-  header : {
-    flex : 1,
-    justifyContent : 'space-between'
-  }
+  scrollView: {
+    backgroundColor: '#003f5c',
+  },
 });
 
 export default PacientListScreen;

@@ -1,3 +1,5 @@
+import * as SMS from 'expo-sms';
+import { LogBox } from 'react-native';
 import Spacer from '../components/Spacer';
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -9,6 +11,8 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 const PacientForm = () => {
 
+    LogBox.ignoreAllLogs();
+
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
@@ -18,15 +22,38 @@ const PacientForm = () => {
     const { createPacient } = useContext(PacientContext)
 
     const [nrSAP, setNrSAP] = useState('');
+    const [adress, setAdress] = useState('');
     const [fullName, setFullName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [clinicPetromed, setClinicPetromed] = useState('');
 
     const [show, setShow] = useState(false);
+    const [showDate, setShowDate] = useState(false);
 
     var [date, setDate] = useState(new Date());
     
     const showDatePicker = () => {
         setShow(true);
+    };
+
+    const dateAppearance = () => {
+        setShowDate(true)
+    };
+
+    const clearFields = () => {
+        setNrSAP('');
+        setAdress('');
+        setFullName('');
+        setPhoneNumber('');
+        setShowDate(false);
+        setClinicPetromed('');
+    };
+
+    const sendSMS = async () => {
+        const { result } = await SMS.sendSMSAsync(
+          [`${phoneNumber}`],
+          `Buna ziua, ${fullName} pe data de ${date.toLocaleDateString()} ati fost...`,//TBC
+        );  
     };
 
     return (
@@ -35,14 +62,34 @@ const PacientForm = () => {
                 <Spacer>
                     <Text style={styles.HeadingText}>Nume Complet</Text>
                     <Input
+                        autoCompleteType = 'name'
                         placeholder='Nume Complet'
                         value={fullName}
                         onChangeText={setFullName}
+                        inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
                                 name='user'
                                 size={24}
-                                color='black'
+                                color='white'
+                            />
+                        }
+                    />
+                </Spacer>
+
+                <Spacer>
+                    <Text style={styles.HeadingText}>Numar de telefon</Text>
+                    <Input
+                        placeholder='Numar de telefon'
+                        value={phoneNumber}
+                        onChangeText={setPhoneNumber}
+                        keyboardType = 'numeric'
+                        inputStyle = {styles.InputText}
+                        leftIcon={
+                            <Icon
+                                name='phone'
+                                size={24}
+                                color='white'
                             />
                         }
                     />
@@ -59,17 +106,20 @@ const PacientForm = () => {
                         />
                     )}
 
-                    <View style={styles.Container}>   
-                        <TouchableOpacity onPress={showDatePicker}>
+                    <TouchableOpacity onPress={() => {showDatePicker(); dateAppearance();}}>
+                        <View style={styles.Container}>
                             <Icon
-                                style={styles.Icon}
+                                style={styles.Calendar}
                                 name='calendar'
                                 size={24}
                                 color='black'
                             />
-                        </TouchableOpacity>
-                        <Text style = {styles.dateText}>{date.toLocaleDateString()}</Text>
-                    </View>
+                            {showDate ? 
+                                (<Text style = {styles.DateText}>{date.toLocaleDateString()}</Text>) : 
+                                (<Text style = {styles.DateText}>Alege data</Text>)
+                            }    
+                        </View> 
+                    </TouchableOpacity>
                 </Spacer>
 
                 <Spacer>
@@ -78,11 +128,12 @@ const PacientForm = () => {
                         placeholder='Departament'
                         value={clinicPetromed}
                         onChangeText={setClinicPetromed}
+                        inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
                                 name='anchor'
                                 size={24}
-                                color='black'
+                                color='white'
                             />
                         }
                     />
@@ -94,11 +145,29 @@ const PacientForm = () => {
                         placeholder='Number SAP'
                         value={nrSAP}
                         onChangeText={setNrSAP}
+                        inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
                                 name='anchor'
                                 size={24}
-                                color='black'
+                                color='white'
+                            />
+                        }
+                    />
+                </Spacer>
+
+                <Spacer>
+                    <Text style={styles.HeadingText}>Adresa</Text>
+                    <Input
+                        placeholder='Adresa'
+                        value={adress}
+                        onChangeText={setAdress}
+                        inputStyle = {styles.InputText}
+                        leftIcon={
+                            <Icon
+                                name='home'
+                                size={24}
+                                color='white'
                             />
                         }
                     />
@@ -106,8 +175,15 @@ const PacientForm = () => {
 
                 <Spacer>
                     <Button
-                        title="CREAZA PACIENT"
-                        onPress={() => createPacient(fullName, date.toLocaleDateString(), clinicPetromed, nrSAP)}
+                        buttonStyle = {styles.Button}
+                        title = "CREAZA PACIENT"
+                        onPress = {
+                            () => {
+                                createPacient(fullName, date.toLocaleDateString(), clinicPetromed, nrSAP);
+                                clearFields();
+                                sendSMS();
+                            }
+                        }
                     />
                 </Spacer>
             </ScrollView>
@@ -115,24 +191,33 @@ const PacientForm = () => {
     );
 };
 
-
 const styles = StyleSheet.create({
     HeadingText: {
         fontSize: 17,
         paddingLeft: 10,
-        fontWeight: 'bold'
+        color: '#fb5b5a',
+        fontWeight: 'bold',
     },
-    Icon : {
-        marginLeft : 10,
-        marginTop: 10
-    }, 
-    dateText: {
+    Calendar : {
         marginLeft : 10,
         marginTop: 10,
-        fontSize : 20
+        color : '#ffffff'
+    },
+    DateText: {
+        marginBottom : 10,
+        marginLeft : 10,
+        marginTop: 10,
+        fontSize : 20,
+        color: 'white'
     },
     Container : {
         flexDirection : 'row',
+    },
+    Button : {
+        backgroundColor : '#fb5b5a'
+    }, 
+    InputText: {
+        color: 'white'
     }
 });
 
