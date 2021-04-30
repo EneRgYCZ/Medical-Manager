@@ -19,35 +19,42 @@ import { Provider as LocationProvider } from './src/context/LocationContext';
 const trackListFlow =  createStackNavigator({
   TrackList: PacientListScreen, //TrackList = PacientList
   TrackDetail: PacientDetailScreen, //TrackDetail = PacientDetail
-})
+});
+
+const loginFlow = createStackNavigator({
+  Signin: SigninScreen,
+  Signup: SignupScreen,
+},
+{
+  initialRouteName: 'Signin',
+}
+);
+
+const mainFlow = createBottomTabNavigator({
+  trackListFlow,
+  TrackCreate: PacientCreateScreen, //TrackCreate = PacientCreate
+  Account: AccountScreen,
+},
+{
+  tabBarOptions: {
+    style: {
+      borderWidth: 0,
+      backgroundColor: '#003f5c',
+    },
+  }
+});
 
 trackListFlow.navigationOptions = () => {
   return {
-    title : 'Pacienti',
-    tabBarIcon: <FontAwesome name = "th-list" size = {27} color = '#fb5b5a' />
+    title: 'Pacienti',
+    tabBarIcon: <FontAwesome name="th-list" size={27} color='#fb5b5a' />
   }
-}
+};
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
-  loginFlow: createStackNavigator({
-    Signup: SignupScreen,
-    Signin: SigninScreen,
-  }),
-  mainFlow: createBottomTabNavigator({
-    trackListFlow,
-    TrackCreate: PacientCreateScreen, //TrackCreate = PacientCreate
-    Account: AccountScreen,
-  },
-  {
-    tabBarOptions : {
-      style: {
-        borderWidth: 0,
-        backgroundColor: '#003f5c',
-      },
-    }
-  }
-  ),
+  loginFlow,
+  mainFlow,
 });
 
 const App = createAppContainer(switchNavigator);

@@ -26,7 +26,7 @@ const tryLocalSignin = (dispatch) => async () => {
     dispatch({ type: "signin", payload: token });
     navigate("TrackList");
   } else {
-    navigate("Signup");
+    navigate("Signin");
   }
 };
 
