@@ -21,11 +21,9 @@ const userSchema = new mongoose.Schema({
   },
   adress: {
     type: String,
-    required: true
   },
   phoneNumber: {
     type: String,
-    required: true
   }
 });
 

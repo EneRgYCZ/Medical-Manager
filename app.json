@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "tracks",
-    "slug": "tracks",
+    "name": "Medical-Manger",
+    "slug": "Medical-Manger",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/logo.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Main-logo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#003f5c"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -21,8 +21,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/Main-logo.png",
+        "backgroundColor": "#003f5c"
       }
     },
     "web": {

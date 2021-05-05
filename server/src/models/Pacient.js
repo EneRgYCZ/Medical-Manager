@@ -28,7 +28,13 @@ const pacientSchema = new mongoose.Schema({
         type: String,
         default: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fkma.ujep.cz%2Fstyle%2Fimages%2Fuser_avatar.png&f=1&nofb=1',
         required: false,
-    }
+    },
+    phoneNumber: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
     //To be continued @Bobo
 })
 

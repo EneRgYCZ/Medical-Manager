@@ -18,7 +18,7 @@ const SignupScreen = ({ navigation }) => {
         onSubmit={signup}
         navigationText = "Already have an account"
         route = "Signin"
-        crateAccount = {true} //Parameter for deciding if you have to repeat a password (e.g. when creating an account)
+        createAccount = {true} 
       />  
     </View>
   );

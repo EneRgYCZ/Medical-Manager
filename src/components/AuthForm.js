@@ -3,8 +3,9 @@ import NavLink from '../components/NavLink';
 import { Text } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { StyleSheet, TextInput, View, TouchableOpacity } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 
-const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, route, crateAccount }) => {
+const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, route, createAccount }) => {
   
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
@@ -14,8 +15,11 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
   const [phoneNumber, setPhoneNumber] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const [animated, setAnimated] = useState(false);
+
   const verificationPass = () => {
-    if (password === confirmPassword || crateAccount === false) {
+    if (password === confirmPassword || createAccount === false) {
+      setAnimated(true);
       onSubmit({ email, password, firstName, lastName, address, phoneNumber })
     }
     else {
@@ -25,6 +29,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
 
   return (
     <View style={styles.container}>
+      {animated && errorMessage === '' ? (<ActivityIndicator size="large" color="#fb5b5a" />) :
 
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -34,6 +39,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
           style={styles.inputText}
           placeholderTextColor="#003f5c"
           placeholder="Email"
+          keyboardType='email-address'
           value={email}
           onChangeText={setEmail}
           autoCapitalize="none"
@@ -55,7 +61,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
       </View>
 
       {
-        crateAccount ?
+        createAccount ?
           (
             <View style={styles.inputView}>
               <TextInput
@@ -74,13 +80,13 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
       }
 
       { 
-        crateAccount ?
+        createAccount ?
           (
             <View style={styles.inputView}>
               <TextInput
                 style={styles.inputText}
                 placeholderTextColor="#003f5c"
-                placeholder="FirstName"
+                placeholder="First Name"
                 value={firstName}
                 onChangeText={setFirstName}
                 autoCapitalize="none"
@@ -92,13 +98,13 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
       }
 
       { 
-        crateAccount ?
+        createAccount ?
           (
             <View style={styles.inputView}>
               <TextInput
                 style={styles.inputText}
                 placeholderTextColor="#003f5c"
-                placeholder="LastName"
+                placeholder="Last Name"
                 value={lastName}
                 onChangeText={setLastName}
                 autoCapitalize="none"
@@ -110,7 +116,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
       }
 
       { 
-        crateAccount ?
+        createAccount ?
           (
             <View style={styles.inputView}>
               <TextInput
@@ -118,6 +124,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
                 placeholderTextColor="#003f5c"
                 placeholder="Adress"
                 value={address}
+                keyboardType='email-address'
                 onChangeText={setAddress}
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -128,7 +135,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
       }
 
       { 
-        crateAccount ?
+        createAccount ?
           (
             <View style={styles.inputView}>
               <TextInput
@@ -136,6 +143,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
                 placeholderTextColor="#003f5c"
                 placeholder="Phone Number"
                 value={phoneNumber}
+                keyboardType='numeric'
                 onChangeText={setPhoneNumber}
                 autoCapitalize="none"
                 autoCorrect={false}
@@ -167,6 +175,7 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
 
       </View>
     </ScrollView>
+    }
     </View>
   );
 };

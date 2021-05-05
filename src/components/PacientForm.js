@@ -22,7 +22,7 @@ const PacientForm = () => {
     const { createPacient } = useContext(PacientContext)
 
     const [nrSAP, setNrSAP] = useState('');
-    const [adress, setAdress] = useState('');
+    const [address, setAddress] = useState('');
     const [fullName, setFullName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [clinicPetromed, setClinicPetromed] = useState('');
@@ -42,7 +42,7 @@ const PacientForm = () => {
 
     const clearFields = () => {
         setNrSAP('');
-        setAdress('');
+        setAddress('');
         setFullName('');
         setPhoneNumber('');
         setShowDate(false);
@@ -160,8 +160,8 @@ const PacientForm = () => {
                     <Text style={styles.HeadingText}>Adresa</Text>
                     <Input
                         placeholder='Adresa'
-                        value={adress}
-                        onChangeText={setAdress}
+                        value={address}
+                        onChangeText={setAddress}
                         inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
@@ -179,7 +179,7 @@ const PacientForm = () => {
                         title = "CREAZA PACIENT"
                         onPress = {
                             () => {
-                                createPacient(fullName, date.toLocaleDateString(), clinicPetromed, nrSAP);
+                                createPacient(fullName, date.toLocaleDateString(), clinicPetromed, nrSAP, phoneNumber, address);
                                 clearFields();
                                 sendSMS();
                             }

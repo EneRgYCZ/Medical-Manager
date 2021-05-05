@@ -20,13 +20,18 @@ const fetchPacients = dispatch => async () => {
     }
 }
 
-const createPacient = dispatch => async (fullName, dateOfReport, clinicPetromed, nrSAP) => {
-    await trackerApi.post('/pacients', { fullName, dateOfReport, clinicPetromed, nrSAP });
-    navigate('TrackList');
+const createPacient = dispatch => async (fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address) => {
+    await trackerApi.post('/pacients', { fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address });
+    navigate('PacientList');
+};
+
+const deletePacient = dispatch => async (_id) => {
+    await trackerApi.delete('/pacients', { _id });
+    navigate('PacientList');
 };
 
 export const { Provider, Context } = createDataContext(
     pacientReducer,
-    { fetchPacients, createPacient },
+    { fetchPacients, createPacient, deletePacient },
     []
 );

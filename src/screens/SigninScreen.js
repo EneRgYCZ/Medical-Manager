@@ -17,7 +17,7 @@ const SigninScreen = () => {
         submitButtonText="LOGIN"
         navigationText="Create an account"
         route="Signup"
-        crateAccount={false}
+        createAccount={false}
       />
     </View>
   );

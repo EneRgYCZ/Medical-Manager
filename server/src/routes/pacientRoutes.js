@@ -15,15 +15,27 @@ router.get('/pacients', async (req, res) => {
 });
 
 router.post('/pacients', async (req, res) => {
-  const { fullName, dateOfReport, clinicPetromed, nrSAP } = req.body; //To add the remaining atributes
+  const { fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address } = req.body; //To add the remaining atributes
 
   try {
-    const pacient = new Pacient({ userId : req.user._id, fullName, dateOfReport, clinicPetromed, nrSAP }); //To add the remaining atributes
+    const pacient = new Pacient({ userId: req.user._id, fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address }); //To add the remaining atributes
     await pacient.save();
     res.send(pacient);
   } catch (err) {
     res.status(422).send({ error: err.message });
   }
+});
+
+router.delete('/pacients/:_id', async (req, res) => {
+  const pacient = Pacient.find(req.pacients._id)
+
+  try {
+    
+  } catch (err) {
+
+  }
+
+
 });
 
 module.exports = router;

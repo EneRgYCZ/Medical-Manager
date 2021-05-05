@@ -7,6 +7,7 @@ import AccountScreen from './src/screens/AccountScreen';
 import { createStackNavigator } from 'react-navigation-stack';
 import PacientListScreen from './src/screens/PacientListScreen';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+import PacientEditScreen from './src/screens/PacientEditScreen';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import PacientCreateScreen from './src/screens/PacientCreateScreen';
 import PacientDetailScreen from './src/screens/PacientDetailScreen';
@@ -17,8 +18,9 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Provider as LocationProvider } from './src/context/LocationContext';
 
 const trackListFlow =  createStackNavigator({
-  TrackList: PacientListScreen, //TrackList = PacientList
+  PacientList: PacientListScreen,
   TrackDetail: PacientDetailScreen, //TrackDetail = PacientDetail
+  PacientEdit : PacientEditScreen,
 });
 
 const loginFlow = createStackNavigator({
@@ -27,15 +29,13 @@ const loginFlow = createStackNavigator({
 },
 {
   initialRouteName: 'Signin',
-}
-);
+});
 
 const mainFlow = createBottomTabNavigator({
   trackListFlow,
   TrackCreate: PacientCreateScreen, //TrackCreate = PacientCreate
-  Account: AccountScreen,
-},
-{
+  Cont: AccountScreen,
+},{
   tabBarOptions: {
     style: {
       borderWidth: 0,
@@ -48,7 +48,7 @@ trackListFlow.navigationOptions = () => {
   return {
     title: 'Pacienti',
     tabBarIcon: <FontAwesome name="th-list" size={27} color='#fb5b5a' />
-  }
+  };
 };
 
 const switchNavigator = createSwitchNavigator({

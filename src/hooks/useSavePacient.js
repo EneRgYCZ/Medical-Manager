@@ -6,10 +6,10 @@ export default () => {
 
     const { createPacient } = useContext(PacientContext);
 
-    const savePacient = async (fullName, dateOfReport, clinicPetromed, nrSAP) => {
+    const savePacient = async (fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address) => {
         try {
-            await createPacient(fullName, dateOfReport, clinicPetromed, nrSAP);
-            navigate('TrackList');
+            await createPacient(fullName, dateOfReport, clinicPetromed, nrSAP, phoneNumber, address);
+            navigate('PacientList');
         } catch (err) {
             console.log(err);
         }

@@ -10,7 +10,7 @@ export default () => {
     const saveTrack = async () => {
         await createTrack(name, locations);
         reset();
-        navigate('TrackList');
+        navigate('PacientList');
     }
 
     return[saveTrack];
