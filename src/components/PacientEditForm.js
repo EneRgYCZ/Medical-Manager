@@ -134,7 +134,7 @@ const PacientEditForm = ({ _id, navigation }) => {
                     </Spacer>
 
                     <Spacer>
-                         <Text style={styles.HeadingText}>Numar SAP</Text>
+                         <Text style={styles.HeadingText}>Numar De Identificare</Text>
                          <Input
                               placeholder={pacient.nrSAP}
                               value={nrSAP}

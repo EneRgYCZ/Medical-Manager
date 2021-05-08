@@ -2,6 +2,7 @@ import { LogBox } from 'react-native';
 import React, { useContext } from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { FontAwesome } from '@expo/vector-icons';
+import DetailText from '../components/DetailText';
 import { StyleSheet, Text, View } from 'react-native';
 import { Context as PacientContext } from '../context/PacientContext';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
@@ -37,29 +38,30 @@ const PacientDetailScreen = ({ navigation }) => {
 
         <ScrollView showsVerticalScrollIndicator={false}>
 
-          <Text style={styles.DetailText}>
-            Data raportarii:
-          </Text>
+          <DetailText
+            title='Data raportarii:'
+            content={pacient.dateOfReport} 
+          />
 
-          <Text style={styles.ContentText}>
-            {pacient.dateOfReport}
-          </Text>
+          <DetailText
+            title='Clinica:'
+            content={pacient.clinicPetromed}
+          />
 
-          <Text style={styles.DetailText}>
-            Clinica:
-          </Text>
+          <DetailText
+            title='Numarul De Identificare:'
+            content={pacient.nrSAP}
+          />
 
-          <Text style={styles.ContentText}>
-            {pacient.clinicPetromed}
-          </Text>
+          <DetailText
+            title='Numarul De Telefon:'
+            content={pacient.phoneNumber}
+          />
 
-          <Text style={styles.DetailText}>
-            Numarul SAP:
-          </Text>
-
-          <Text style={styles.ContentText}>
-            {pacient.nrSAP}
-          </Text>
+          <DetailText
+            title='Adresa:'
+            content={pacient.address}
+          />
 
         </ScrollView>
 
@@ -87,20 +89,6 @@ const styles = StyleSheet.create({
     color: '#fb5b5a',
     fontWeight: 'bold',
     alignSelf: 'center',
-  },
-
-  ContentText: {
-    fontSize: 18,
-    paddingLeft: 13,
-    color: '#ffffff',
-    fontWeight: 'bold'
-  },
-
-  DetailText: {
-    fontSize: 18,
-    paddingTop: 13,
-    paddingLeft: 13,
-    color: '#ffffff',
   },
 
   Header: {

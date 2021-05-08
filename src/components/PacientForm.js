@@ -140,9 +140,9 @@ const PacientForm = () => {
                 </Spacer>
 
                 <Spacer>
-                    <Text style={styles.HeadingText}>Numar SAP</Text>
+                    <Text style={styles.HeadingText}>Numar De Identificare</Text>
                     <Input
-                        placeholder='Number SAP'
+                        placeholder='Numar De Identificare'
                         value={nrSAP}
                         onChangeText={setNrSAP}
                         inputStyle = {styles.InputText}

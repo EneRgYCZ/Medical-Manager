@@ -4,9 +4,9 @@
     "slug": "Medical-Manger",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/logo-app.png",
     "splash": {
-      "image": "./assets/Main-logo.png",
+      "image": "./assets/logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#003f5c"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/Main-logo.png",
+        "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#003f5c"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/logo.png"
     }
   }
 }
