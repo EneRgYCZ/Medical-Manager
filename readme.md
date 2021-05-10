@@ -33,6 +33,7 @@ module.exports = mongoUri
 ```
 -ngrok http "your port or domain"
 ```
+#### Navigate to `/src/api/tracker.js` file and replace the `baseURL` string with the ngrok url you just created
 
 ## 4.Run expo cli
 
