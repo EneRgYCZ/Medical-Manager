@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/logo.png"
-    }
+    },
+    "description": "Descriere...",
+    "githubUrl": "https://github.com/EneRgYCZ/Medical-Manager"
   }
 }
