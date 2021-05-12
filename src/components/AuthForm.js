@@ -8,6 +8,7 @@ import { ActivityIndicator } from 'react-native';
 const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, route, createAccount }) => {
   
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
   const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [lastName, setLastName] = useState('');
@@ -19,11 +20,13 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
 
   const verificationPass = () => {
     if (password === confirmPassword || createAccount === false) {
+      setError('');
       setAnimated(true);
       onSubmit({ email, password, firstName, lastName, address, phoneNumber })
     }
     else {
-      console.log('Nu merge')//To be replaced in one brigh day...
+      setError ('The password is not the same');
+      console.log(errorMessage)
     }
   }
 
@@ -169,8 +172,12 @@ const AuthForm = ({ navigationText, errorMessage, onSubmit, submitButtonText, ro
         routeName={route}
       />
 
+      {error ? (
+        (<Text style={styles.errorMessage}>{error}</Text>)
+      ) : null}
+
       {errorMessage ? (
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
+        (<Text style={styles.errorMessage}>{errorMessage}</Text>)
       ) : null}
 
       </View>
