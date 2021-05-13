@@ -125,7 +125,7 @@ const PacientEditForm = ({ _id, navigation }) => {
                               inputStyle={styles.InputText}
                               leftIcon={
                                    <Icon
-                                        name='anchor'
+                                        name='archive'
                                         size={24}
                                         color='white'
                                    />
@@ -142,7 +142,7 @@ const PacientEditForm = ({ _id, navigation }) => {
                               inputStyle={styles.InputText}
                               leftIcon={
                                    <Icon
-                                        name='anchor'
+                                        name='tag'
                                         size={24}
                                         color='white'
                                    />

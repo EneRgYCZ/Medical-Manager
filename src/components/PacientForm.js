@@ -131,7 +131,7 @@ const PacientForm = () => {
                         inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
-                                name='anchor'
+                                name='archive'
                                 size={24}
                                 color='white'
                             />
@@ -148,7 +148,7 @@ const PacientForm = () => {
                         inputStyle = {styles.InputText}
                         leftIcon={
                             <Icon
-                                name='anchor'
+                                name='tag'
                                 size={24}
                                 color='white'
                             />

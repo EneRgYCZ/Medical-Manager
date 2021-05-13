@@ -62,7 +62,7 @@ const PacientListScreen = ({ navigation }) => {
           autoCorrect={false}   
           onChangeText={setSearch}
           placeholder="Cauta Pacienti..."
-          containerStyle = {styles.container}                     
+          containerStyle = {styles.searchBar}                     
         />  
 
         <PacientList
@@ -84,6 +84,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
+    backgroundColor: '#003f5c'
+  },
+
+  searchBar: {
+    paddingTop: 20,
     backgroundColor: '#003f5c'
   },
 
